@@ -2,26 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+} */
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: #FFFFFF;
+  background: #111111;
+  scroll-behavior: smooth;
+  height: 2000px;
+  font-family: 'Satoshi', sans-serif;
+}
+
+@font-face {
+  font-family: 'Satoshixl';
+  src: url('/fonts/Satoshi-Bold.ttf') format('truetype-variations');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Satoshi-Light */
+@font-face {
+  font-family: 'Satoshil';
+  src: url('/fonts/satoshi-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.ttf') format('truetype-variations');
+  font-weight: 400;
+  font-style: normal;
+  font-named-instance: 'Regular';
+}
+
+
+.satoshi {
+  font-family: 'satoshi', sans-serif;
+}
+
+.satoshil {
+  font-family: 'satoshil', sans-serif;
+  font-weight: normal;
+}
+
+.satoshixl {
+  font-family: 'satoshixl', sans-serif;
+  font-weight: bold;
+}
+
+/* Set the width and height of the scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #897FD8;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #C9C5E0;
 }
