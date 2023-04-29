@@ -1,8 +1,8 @@
-"use client";
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+'use client';
+import clsx from 'clsx';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 
 import "@/app/assets/css/Navbar.css";
 import orkarlogo from "@/app/assets/images/orkarlogo.svg";
@@ -15,15 +15,15 @@ import { walletDetails } from "@/app/data/static/wallets-details";
 const Navbar = ({ wallet }) => {
   const [walletModal, setWalletModal] = useState(false);
 
-  // Function to handle button click and show the modal
-  const handleButtonClick = () => {
-    setWalletModal(true);
-  };
+	// Function to handle button click and show the modal
+	const handleButtonClick = () => {
+		setWalletModal(true);
+	};
 
-  // Function to handle modal close and hide the modal
-  const handleModalClose = () => {
-    setWalletModal(false);
-  };
+	// Function to handle modal close and hide the modal
+	const handleModalClose = () => {
+		setWalletModal(false);
+	};
 
   const handleMetamask = () => {
     alert("metamask");
