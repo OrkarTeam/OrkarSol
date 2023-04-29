@@ -1,11 +1,11 @@
 import Image from "next/image";
-import clsx from 'clsx';
+import clsx from "clsx";
 
 import heroimage from "@/app/assets/images/heroimage.svg";
 
 export default function Home() {
   return (
-    <div className="relative mt-[80px]">
+    <div className="mt-[80px]">
       <div className="flex items-center justify-between">
         <div id="header">
           <div className="mb-[50px]">
@@ -28,8 +28,12 @@ export default function Home() {
             </p>
           </div>
           <div className="flex items-center gap-[15px]">
-            <Button backgroundColor="bg-[#897fd8] h-[55px] w-[243px]">Connect Wallet</Button>
-            <Button backgroundColor="bg-[#242424] h-[55px] w-[243px]">Explore</Button>
+            <Button backgroundColor="bg-[#897fd8] h-[55px] w-[243px]">
+              Connect Wallet
+            </Button>
+            <Button backgroundColor="bg-[#242424] h-[55px] w-[243px]">
+              Explore
+            </Button>
           </div>
         </div>
         <div className="">
@@ -41,7 +45,7 @@ export default function Home() {
 }
 
 const Button = ({ backgroundColor, className, children, ...restProps }) => {
-  return(
+  return (
     <button
       className={clsx([
         "py-2 px-4 font-[20px] text-white rounded-[10px] cursor-pointer",
@@ -52,5 +56,5 @@ const Button = ({ backgroundColor, className, children, ...restProps }) => {
     >
       {children}
     </button>
-  )
-}
+  );
+};

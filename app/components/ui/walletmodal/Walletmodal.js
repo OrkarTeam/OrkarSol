@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useRef } from "react";
 
+import '@/app/assets/css/Navbar.css';
+
 const WalletModal = ({ onClose, children }) => {
   const modalRef = useRef(null);
 
@@ -28,7 +30,7 @@ const WalletModal = ({ onClose, children }) => {
     <div
       onClick={handleModalClick}
       ref={modalRef}
-      className="bg-[#151515] px-[56.04px] py-[97.14px] h-[700px] w-[1020px] fixed top-[12px] modal transition-all duration-500 z-50"
+      className="bg-[#151515] px-[56.04px] py-[97.14px] h-[700px] w-[1020px] fixed top-[12px] modal transition-all duration-500 modal-open modal-overlay"
     >
       {/* <button onClick={onClose}>X</button> */}
       {children}
