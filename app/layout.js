@@ -10,8 +10,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="satoshi px-[4.5rem]">
-        <Navbar />
-        {children}
+        {/* <ThirdwebProvider> */}
+          <Navbar />
+          {children}
+        {/* </ThirdwebProvider> */}
       </body>
     </html>
   );
