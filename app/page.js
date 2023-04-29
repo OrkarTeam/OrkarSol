@@ -1,5 +1,5 @@
 export default function Home() {
   return (
-    <div className="">Landing page</div>
+    <div className="relative">Landing page</div>
   );
 }

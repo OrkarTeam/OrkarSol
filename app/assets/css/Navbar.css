@@ -1,9 +1,22 @@
 .scene__one {
-  background: linear-gradient(269.98deg, rgba(15, 15, 15, 0.9) 0.02%, rgba(15, 15, 15, 0) 99.98%);
+  background: linear-gradient(
+    269.98deg,
+    rgba(15, 15, 15, 0.9) 0.02%,
+    rgba(15, 15, 15, 0) 99.98%
+  );
   backdrop-filter: blur(72px);
 }
 
 .scene__two {
-  background: linear-gradient(90.1deg, rgba(15, 15, 15, 0.7) 0.06%, rgba(15, 15, 15, 0) 99.93%);
+  background: linear-gradient(
+    90.1deg,
+    rgba(15, 15, 15, 0.7) 0.06%,
+    rgba(15, 15, 15, 0) 99.93%
+  );
   backdrop-filter: blur(72px);
+}
+
+.frame {
+  border: 1px solid #575757;
+  border-radius: 5px;
 }
