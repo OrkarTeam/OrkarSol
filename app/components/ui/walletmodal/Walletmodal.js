@@ -28,7 +28,7 @@ const WalletModal = ({ onClose, children }) => {
     <div
       onClick={handleModalClick}
       ref={modalRef}
-      className="bg-[#151515] px-[56.04px] py-[97.14px] h-[700px] w-[1020px] absolute top-[12px] modal transition-all duration-500"
+      className="bg-[#151515] px-[56.04px] py-[97.14px] h-[700px] w-[1020px] fixed top-[12px] modal transition-all duration-500 z-50"
     >
       {/* <button onClick={onClose}>X</button> */}
       {children}
