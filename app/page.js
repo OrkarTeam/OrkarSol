@@ -5,7 +5,7 @@ import heroimage from "@/app/assets/images/heroimage.svg";
 
 export default function Home() {
   return (
-    <div className="relative mt-[110px]">
+    <div className="relative mt-[80px]">
       <div className="flex items-center justify-between">
         <div id="header">
           <div className="mb-[50px]">
