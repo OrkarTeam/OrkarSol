@@ -6,7 +6,7 @@ const WalletConnect = ({ onOpen }) => {
   return (
     <div
       onClick={onOpen}
-      className="bg-[#6A62AB] w-[68px] h-[42px] rounded-[10px] flex justify-center items-center"
+      className="bg-[#6A62AB] w-[68px] h-[42px] rounded-[10px] flex justify-center items-center cursor-pointer"
     >
       <Image src={wallet} width="" height="" alt="" />
     </div>

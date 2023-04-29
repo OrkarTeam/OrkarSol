@@ -35,7 +35,7 @@ const Navbar = () => {
         "items-center",
       ])}
     >
-      <div className="flex gap-[90px] items-center">
+      <div className="flex gap-[70px] items-center">
         <Link href={routes.home}>
           <div>
             <Image src={orkarlogo} width="130" height="49" alt="Orkar Logo" />
@@ -51,7 +51,6 @@ const Navbar = () => {
               "flex",
               "items-center",
               "px-[20.88px]",
-              "pt-[1px]",
               "gap-[10.87px]",
             ])}
           >
@@ -92,10 +91,10 @@ const Navbar = () => {
       </div>
       {walletModal && ( // Render the modal only if showModal is true
         <WalletModal onClose={handleModalClose}>
-          {/* Pass onClose prop to handle modal close */}
-          {/* Modal content goes here */}
-          <h2>Modal Title</h2>
-          <p>Modal Content</p>
+        <div>
+          <h2 className="Satoshil font-[550] text-[28.02px] leading-[38px] text-white pb-[18.04px]">Connect Wallet</h2>
+          <p className="text-[#C2C2C2] font-[400] text-[28.4176px] leading-[30px]">If you don't have a wallet yet, you can select a provider and create one now.</p>
+          </div>
         </WalletModal>
       )}
     </div>
