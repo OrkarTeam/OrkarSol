@@ -21,7 +21,7 @@
   border-radius: 5px;
 }
 
-.modal-overlay {
+/* .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -37,4 +37,11 @@
 
 .modal {
   z-index: 20;
+} */
+
+.item {
+  width: 907.91px;
+  height: 84.07px;
+  border: 1.30769px solid #575757;
+  border-radius: 9.34066px;
 }
