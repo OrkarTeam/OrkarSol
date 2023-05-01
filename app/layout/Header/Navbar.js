@@ -47,6 +47,9 @@ const Navbar = ({ wallet }) => {
   // Wallet modal
   const [walletModal, setWalletModal] = useState(false);
 
+  //framewidth
+  const [frameWidth, setFrameWidth] = useState("w-[679px]");
+
   // Function to handle button click and show the modal
   const handleButtonClick = () => {
     setWalletModal(true);
@@ -95,6 +98,14 @@ const Navbar = ({ wallet }) => {
     }
   }, [address]);
 
+  useEffect(() => {
+    if (connectionStatus === "connected") {
+      setFrameWidth("w-[580px]");
+    } else {
+      setFrameWidth("w-[679px]");
+    }
+  }, [connectionStatus]);
+
   return (
     <div
       className={clsx([
@@ -104,7 +115,7 @@ const Navbar = ({ wallet }) => {
         "flex",
         "justify-center",
         "items-center",
-        "px-[71px]",
+        "px-[2.5rem]",
       ])}
     >
       <div className="flex gap-[70px] items-center">
@@ -115,16 +126,7 @@ const Navbar = ({ wallet }) => {
         </Link>
         <div>
           <div
-            className={clsx([
-              "frame",
-              "w-[679px]",
-              "h-11",
-              "cursor-pointer",
-              "flex",
-              "items-center",
-              "px-[20.88px]",
-              "gap-[10.87px]",
-            ])}
+            className={clsx([`frame ${frameWidth} h-11 cursor-pointer flex items-center px-[20.88px] gap-[10.87px]`])}
           >
             <div>
               <Image src={searchicon} width="12" height="12" alt="searchIcon" />
@@ -289,13 +291,13 @@ const DrawerUserSection = () => {
   return (
     <div className="h-[258px] w-[460px] rounded-[5px] bg-[#1E1E1E]">
     {userSide.map((data, index) => (
-      <div key={index} className="flex items-center px-6 py-1 justify-between h-16 cursor-pointer">
+      <div key={index} className="flex items-center justify-between h-16 px-6 py-1 cursor-pointer">
         <div className="flex items-center gap-[17.25px]">
           <div>
             <Image src={data.logo} alt="jss" />
           </div>
           <div>
-            <p>{data.name}</p>
+            <p className="capitalize font-[550] text-[12px] leading-[16px]">{data.name}</p>
           </div>
         </div>
         {/* arrow */}
@@ -307,3 +309,4 @@ const DrawerUserSection = () => {
     </div>
   );
 };
+

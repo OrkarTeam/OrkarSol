@@ -31,7 +31,7 @@ export default function Home() {
 const Hero = () => {
   return(
     <>
-      <div className="flex items-center gap-[220px] mb-[114.99px] px-[71px]">
+      <div className="flex items-center gap-[220px] mb-[114.99px] px-[2.5rem]">
         <div id="header">
           <div className="mb-[50px]">
             <h1 className="text-[65px] leading-[123%]">Buy and Sell</h1>
@@ -72,7 +72,7 @@ const Hero = () => {
 const TrendingCollections = () => {
   return(
     <>
-      <div className="px-[71px]">
+      <div className="px-[2.5rem]">
         <div>
           <h2>Trending Collections</h2>
         </div>
