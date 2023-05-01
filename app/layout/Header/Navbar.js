@@ -12,6 +12,12 @@ import WalletConnect from "@/app/components/walletconnect/WalletConnect";
 import routes from "@/app/config/routes.js";
 import WalletModal from "@/app/components/ui/walletmodal/Walletmodal";
 import { walletDetails } from "@/app/data/static/wallets-details";
+import bellicon from "@/app/assets/images/bellicon.svg";
+import carticon from "@/app/assets/images/carticon.svg";
+import nullavatar from "@/app/assets/images/nullavatar.svg";
+import closeicon from "@/app/assets/images/close.svg";
+import exit from "@/app/assets/images/exit.svg";
+import { userSide } from "@/app/data/static/user-drawer-section";
 
 // Blockchain import
 import {
@@ -35,8 +41,8 @@ const Navbar = ({ wallet }) => {
   const address = useAddress();
   console.log("address connected", address);
 
-  // To fetch user balances 
-  const [userBalance, setUserBalance] = useState()
+  // To fetch user balances
+  const [userBalance, setUserBalance] = useState();
 
   // Wallet modal
   const [walletModal, setWalletModal] = useState(false);
@@ -71,11 +77,11 @@ const Navbar = ({ wallet }) => {
   async function fetchUserBalance() {
     const res = await axios.get(`http://localhost:4000/nativeBalance`, {
       params: {
-        address: address
-      }
+        address: address,
+      },
     });
-    console.log("userBalance", res.data)
-    setUserBalance(res.data)
+    console.log("userBalance", res.data);
+    setUserBalance(res.data);
   }
 
   //console.log(userBalance.maticPrice)
@@ -83,9 +89,9 @@ const Navbar = ({ wallet }) => {
   // useEffect for fetching user data
   useEffect(() => {
     if (address) {
-      fetchUserBalance()
+      fetchUserBalance();
     }
-  }, [address])
+  }, [address]);
 
   return (
     <div
@@ -96,7 +102,9 @@ const Navbar = ({ wallet }) => {
         "flex",
         "justify-center",
         "items-center",
-      ])}>
+        "px-[71px]",
+      ])}
+    >
       <div className="flex gap-[70px] items-center">
         <Link href={routes.home}>
           <div>
@@ -114,7 +122,8 @@ const Navbar = ({ wallet }) => {
               "items-center",
               "px-[20.88px]",
               "gap-[10.87px]",
-            ])}>
+            ])}
+          >
             <div>
               <Image src={searchicon} width="12" height="12" alt="searchIcon" />
             </div>
@@ -151,10 +160,7 @@ const Navbar = ({ wallet }) => {
             <WalletConnect onOpen={handleButtonClick} />
           ) : connectionStatus === "connected" ? (
             <>
-              Address {" "}
-              {/* {`${address.slice(0,6)}...${address.slice(address.length - 4)}`} */}
-              {/* doesnt load on first reload */}
-              {address}
+              <AfterConnected />
             </>
           ) : (
             <></>
@@ -203,7 +209,8 @@ const Item = ({ data, onClick }) => {
       onClick={onClick}
       className={clsx([
         "item px-[28.02px] py-[22.42px] flex justify-between items-center cursor-pointer mt-4 mb-4 hover:bg-[#1F1F1F] transition-all duration-500",
-      ])}>
+      ])}
+    >
       <div className="flex items-center gap-4">
         <div>
           <Image src={data.logo} width="" height="" alt="" />
@@ -213,6 +220,88 @@ const Item = ({ data, onClick }) => {
       <div>
         <Image src={data.end} width="" height="" alt="" />
       </div>
+    </div>
+  );
+};
+
+const AfterConnected = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div>
+      <div className="flex items-center gap-10">
+        <div className="cursor-pointer">
+          <Image src={bellicon} alt="bell icon" />
+        </div>
+        <div className="cursor-pointer">
+          <Image src={carticon} alt="cart icon" />
+        </div>
+        <div onClick={() => setIsOpen(true)} className="cursor-pointer">
+          <Image src={nullavatar} alt="avatar" />
+        </div>
+      </div>
+      {isOpen && (
+        <div className="bg-[#151515] h-[1126px] w-[527px] absolute right-0 top-0 px-[34px] py-[35px]">
+          <div className="flex justify-end mb-[45px]">
+            <div className="cursor-pointer" onClick={() => setIsOpen(false)}>
+              <Image src={closeicon} alt="" />
+            </div>
+          </div>
+          {/*  */}
+          <div className="h-[45px] w-[460px] flex justify-between items-center mb-11">
+            <div className="flex items-center gap-3">
+              <div>
+                <Image src={nullavatar} alt="avatar" />
+              </div>
+              <div>
+                {/* this is the part to display wallet address */}
+                <p className="font-[550] text-[15px] leading-5 text-white">
+                  0x952222...CC4BAfe5
+                </p>
+                <p className="font-[300] text-[12px] leading-4 text-[#787878]">
+                  0x952222...CC4BAfe5
+                </p>
+              </div>
+            </div>
+            <div>
+              <div
+                className={clsx([
+                  "logout flex justify-center items-center cursor-pointer",
+                ])}
+              >
+                <Image src={exit} alt="logout" />
+              </div>
+            </div>
+          </div>
+          {/*  */}
+          <>
+            <DrawerUserSection />
+          </>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const DrawerUserSection = () => {
+  return (
+    <div className="h-[258px] w-[460px] rounded-[5px] bg-[#1E1E1E]">
+    {userSide.map((data, index) => (
+      <div key={index} className="flex items-center px-6 py-1 justify-between h-16 cursor-pointer">
+        <div className="flex items-center gap-[17.25px]">
+          <div>
+            <Image src={data.logo} alt="jss" />
+          </div>
+          <div>
+            <p>{data.name}</p>
+          </div>
+        </div>
+        {/* arrow */}
+        <div>
+          <Image src={data.end} alt="" />
+        </div>
+      </div>
+    ))}
     </div>
   );
 };

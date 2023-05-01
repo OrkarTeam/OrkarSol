@@ -14,7 +14,7 @@ const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="satoshi px-[4.5rem]">
+      <body className="satoshi">
         <ThirdwebProvider
           activeChain={Ethereum}
           supportedChains={[Ethereum, Polygon]}
