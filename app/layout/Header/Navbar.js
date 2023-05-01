@@ -1,8 +1,9 @@
-'use client';
-import clsx from 'clsx';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
+"use client";
+import clsx from "clsx";
+import Image from "next/image";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 import "@/app/assets/css/Navbar.css";
 import orkarlogo from "@/app/assets/images/orkarlogo.svg";
@@ -12,34 +13,79 @@ import routes from "@/app/config/routes.js";
 import WalletModal from "@/app/components/ui/walletmodal/Walletmodal";
 import { walletDetails } from "@/app/data/static/wallets-details";
 
+// Blockchain import
+import {
+  useConnectionStatus,
+  useMetamask,
+  useCoinbaseWallet,
+  useWalletConnect,
+  useAddress,
+} from "@thirdweb-dev/react";
+
 const Navbar = ({ wallet }) => {
+  // Connect wallet functions
+  const connectMetamask = useMetamask();
+  const connectWalletConnect = useWalletConnect();
+  const connectCoinbaseWallet = useCoinbaseWallet();
+
+  const connectionStatus = useConnectionStatus();
+  console.log("connectionStatus", connectionStatus);
+
+  // To fetch user address
+  const address = useAddress();
+  console.log("address connected", address);
+
+  // To fetch user balances 
+  const [userBalance, setUserBalance] = useState()
+
+  // Wallet modal
   const [walletModal, setWalletModal] = useState(false);
 
-	// Function to handle button click and show the modal
-	const handleButtonClick = () => {
-		setWalletModal(true);
-	};
-
-	// Function to handle modal close and hide the modal
-	const handleModalClose = () => {
-		setWalletModal(false);
-	};
-
-  const handleMetamask = () => {
-    alert("metamask");
+  // Function to handle button click and show the modal
+  const handleButtonClick = () => {
+    setWalletModal(true);
   };
 
-  const handleTrustWallet = () => {
-    alert("trustwallet");
+  // Function to handle modal close and hide the modal
+  const handleModalClose = () => {
+    setWalletModal(false);
+  };
+
+  const handleMetamask = () => {
+    try {
+      connectMetamask();
+    } catch (e) {
+      console.log("wallet connect error", e);
+    }
   };
 
   const handleWalletConnect = () => {
-    alert("wallet connect");
+    connectWalletConnect();
   };
 
   const handleCoinbase = () => {
-    alert("coinbase");
+    connectCoinbaseWallet;
   };
+
+  // Fetch user balance function
+  async function fetchUserBalance() {
+    const res = await axios.get(`http://localhost:4000/nativeBalance`, {
+      params: {
+        address: address
+      }
+    });
+    console.log("userBalance", res.data)
+    setUserBalance(res.data)
+  }
+
+  console.log(userBalance.maticPrice)
+
+  // useEffect for fetching user data
+  useEffect(() => {
+    if (address) {
+      fetchUserBalance()
+    }
+  }, [address])
 
   return (
     <div
@@ -50,8 +96,7 @@ const Navbar = ({ wallet }) => {
         "flex",
         "justify-center",
         "items-center",
-      ])}
-    >
+      ])}>
       <div className="flex gap-[70px] items-center">
         <Link href={routes.home}>
           <div>
@@ -69,8 +114,7 @@ const Navbar = ({ wallet }) => {
               "items-center",
               "px-[20.88px]",
               "gap-[10.87px]",
-            ])}
-          >
+            ])}>
             <div>
               <Image src={searchicon} width="12" height="12" alt="searchIcon" />
             </div>
@@ -103,7 +147,18 @@ const Navbar = ({ wallet }) => {
           </ul>
         </div>
         <div>
-          <WalletConnect onOpen={handleButtonClick} />
+          {connectionStatus === "disconnected" ? (
+            <WalletConnect onOpen={handleButtonClick} />
+          ) : connectionStatus === "connected" ? (
+            <>
+              Address {" "}
+              {/* {`${address.slice(0,6)}...${address.slice(address.length - 4)}`} */}
+              {/* doesnt load on first reload */}
+              {address}
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       {walletModal && ( // Render the modal only if showModal is true
@@ -125,8 +180,6 @@ const Navbar = ({ wallet }) => {
                 onClick={() => {
                   if (index === 0) {
                     handleMetamask();
-                  } else if (index === 1) {
-                    handleTrustWallet();
                   } else if (index === 2) {
                     handleWalletConnect();
                   } else if (index === 3) {
@@ -150,8 +203,7 @@ const Item = ({ data, onClick }) => {
       onClick={onClick}
       className={clsx([
         "item px-[28.02px] py-[22.42px] flex justify-between items-center cursor-pointer mt-4 mb-4 hover:bg-[#1F1F1F] transition-all duration-500",
-      ])}
-    >
+      ])}>
       <div className="flex items-center gap-4">
         <div>
           <Image src={data.logo} width="" height="" alt="" />

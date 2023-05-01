@@ -1,5 +1,8 @@
+'use client'
 import "./globals.css";
 import Navbar from "app/layout/Header/Navbar.js";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { Ethereum, Polygon } from "@thirdweb-dev/chains";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,10 +13,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="satoshi px-[4.5rem]">
-        {/* <ThirdwebProvider> */}
+        <ThirdwebProvider
+          activeChain={Ethereum}
+          supportedChains={[Ethereum, Polygon]}
+        >
           <Navbar />
           {children}
-        {/* </ThirdwebProvider> */}
+        </ThirdwebProvider>
       </body>
     </html>
   );
