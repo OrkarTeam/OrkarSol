@@ -32,7 +32,7 @@ const Navbar = ({ wallet }) => {
   // Connect wallet functions
   const connectMetamask = useMetamask();
   const connectWalletConnect = useWalletConnect();
-  const connectCoinbaseWallet = useCoinbaseWallet();
+  const connectWithCoinbase = useCoinbaseWallet();
 
   const connectionStatus = useConnectionStatus();
   console.log("connectionStatus", connectionStatus);
@@ -61,7 +61,8 @@ const Navbar = ({ wallet }) => {
     try {
       connectMetamask();
     } catch (e) {
-      console.log("wallet connect error", e);
+      // console.log("wallet connect error", e);
+      alert(e)
     }
   };
 
@@ -70,7 +71,7 @@ const Navbar = ({ wallet }) => {
   };
 
   const handleCoinbase = () => {
-    connectCoinbaseWallet();
+    connectWithCoinbase();
   };
 
   // Fetch user balance function
@@ -84,7 +85,8 @@ const Navbar = ({ wallet }) => {
     setUserBalance(res.data);
   }
 
-  //console.log(userBalance.maticPrice)
+  ////console.log(userBalance.maticPrice)
+  console.log(userBalance)
 
   // useEffect for fetching user data
   useEffect(() => {

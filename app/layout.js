@@ -15,13 +15,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="satoshi">
-        <ThirdwebProvider
-          activeChain={Ethereum}
-          supportedChains={[Ethereum, Polygon]}
-        >
-          <Navbar />
-          {children}
-        </ThirdwebProvider>
+        {/* <ErrorBoundary> */}
+          <ThirdwebProvider
+            activeChain={Ethereum}
+            supportedChains={[Ethereum, Polygon]}>
+            <Navbar />
+            {children}
+          </ThirdwebProvider>
+        {/* </ErrorBoundary> */}
       </body>
     </html>
   );
