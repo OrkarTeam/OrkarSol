@@ -64,7 +64,7 @@ const Navbar = ({ wallet }) => {
   };
 
   const handleCoinbase = () => {
-    connectCoinbaseWallet;
+    connectCoinbaseWallet();
   };
 
   // Fetch user balance function
@@ -78,7 +78,7 @@ const Navbar = ({ wallet }) => {
     setUserBalance(res.data)
   }
 
-  console.log(userBalance.maticPrice)
+  //console.log(userBalance.maticPrice)
 
   // useEffect for fetching user data
   useEffect(() => {

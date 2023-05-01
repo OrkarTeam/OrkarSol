@@ -3,10 +3,35 @@ import clsx from "clsx";
 
 import heroimage from "@/app/assets/images/heroimage.svg";
 
+const Button = ({ backgroundColor, className, children, ...restProps }) => {
+  return (
+    <button
+      className={clsx([
+        "py-2 px-4 font-[20px] text-white rounded-[10px] cursor-pointer",
+        backgroundColor,
+        className,
+      ])}
+      {...restProps}
+    >
+      {children}
+    </button>
+  );
+};
+
+
 export default function Home() {
   return (
     <div className="mt-[80px]">
-      <div className="flex items-center justify-between">
+      <Hero />
+      <TrendingCollections />
+    </div>
+  );
+}
+
+const Hero = () => {
+  return(
+    <>
+      <div className="flex items-center justify-between mb-[114.99px]">
         <div id="header">
           <div className="mb-[50px]">
             <h1 className="text-[65px] leading-[123%]">Buy and Sell</h1>
@@ -40,21 +65,19 @@ export default function Home() {
           <Image src={heroimage} alt="$orkar" />
         </div>
       </div>
-    </div>
+    </>
   );
-}
+};
 
-const Button = ({ backgroundColor, className, children, ...restProps }) => {
-  return (
-    <button
-      className={clsx([
-        "py-2 px-4 font-[20px] text-white rounded-[10px] cursor-pointer",
-        backgroundColor,
-        className,
-      ])}
-      {...restProps}
-    >
-      {children}
-    </button>
+const TrendingCollections = () => {
+  return(
+    <>
+      <div>
+        <div>
+          <h2>Trending Collections</h2>
+        </div>
+        <div></div>
+      </div>
+    </>
   );
 };
