@@ -78,7 +78,7 @@ const Navbar = ({ wallet }) => {
     setUserBalance(res.data)
   }
 
-  console.log(userBalance.maticPrice)
+  //console.log(userBalance.maticPrice)
 
   // useEffect for fetching user data
   useEffect(() => {
