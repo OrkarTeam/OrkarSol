@@ -26,6 +26,7 @@ import {
   useCoinbaseWallet,
   useWalletConnect,
   useAddress,
+  useDisconnect,
 } from "@thirdweb-dev/react";
 
 const Navbar = ({ wallet }) => {
@@ -40,6 +41,9 @@ const Navbar = ({ wallet }) => {
   // To fetch user address
   const address = useAddress();
   console.log("address connected", address);
+
+  // Disconnect user wallet
+  const disconnect = useDisconnect();
 
   // To fetch user balances
   const [userBalance, setUserBalance] = useState();
@@ -65,7 +69,7 @@ const Navbar = ({ wallet }) => {
       connectMetamask();
     } catch (e) {
       // console.log("wallet connect error", e);
-      alert(e)
+      alert(e);
     }
   };
 
@@ -88,8 +92,8 @@ const Navbar = ({ wallet }) => {
     setUserBalance(res.data);
   }
 
-  ////console.log(userBalance.maticPrice)
-  console.log(userBalance)
+  //console.log(userBalance.maticPrice)
+  console.log(userBalance);
 
   // useEffect for fetching user data
   useEffect(() => {
@@ -116,8 +120,7 @@ const Navbar = ({ wallet }) => {
         "justify-center",
         "items-center",
         "px-[2.5rem]",
-      ])}
-    >
+      ])}>
       <div className="flex gap-[70px] items-center">
         <Link href={routes.home}>
           <div>
@@ -126,8 +129,9 @@ const Navbar = ({ wallet }) => {
         </Link>
         <div>
           <div
-            className={clsx([`frame ${frameWidth} h-11 cursor-pointer flex items-center px-[20.88px] gap-[10.87px]`])}
-          >
+            className={clsx([
+              `frame ${frameWidth} h-11 cursor-pointer flex items-center px-[20.88px] gap-[10.87px]`,
+            ])}>
             <div>
               <Image src={searchicon} width="12" height="12" alt="searchIcon" />
             </div>
@@ -164,7 +168,11 @@ const Navbar = ({ wallet }) => {
             <WalletConnect onOpen={handleButtonClick} />
           ) : connectionStatus === "connected" ? (
             <>
-              <AfterConnected />
+              <AfterConnected 
+                address={address}
+                  disconnect={disconnect}    
+                  userBalance={userBalance}
+              />
             </>
           ) : (
             <></>
@@ -228,7 +236,7 @@ const Item = ({ data, onClick }) => {
   );
 };
 
-const AfterConnected = () => {
+const AfterConnected = ({ address, disconnect, userBalance }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -260,10 +268,12 @@ const AfterConnected = () => {
               <div>
                 {/* this is the part to display wallet address */}
                 <p className="font-[550] text-[15px] leading-5 text-white">
-                  0x952222...CC4BAfe5
+                  {address?.substring(0, 5)}...
+                  {address?.substring(address.length, address.length - 5)}
                 </p>
                 <p className="font-[300] text-[12px] leading-4 text-[#787878]">
-                  0x952222...CC4BAfe5
+                  {address?.substring(0, 5)}...
+                  {address?.substring(address.length, address.length - 5)}
                 </p>
               </div>
             </div>
@@ -272,7 +282,7 @@ const AfterConnected = () => {
                 className={clsx([
                   "logout flex justify-center items-center cursor-pointer",
                 ])}
-              >
+                onClick={disconnect}>
                 <Image src={exit} alt="logout" />
               </div>
             </div>
