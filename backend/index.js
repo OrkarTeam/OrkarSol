@@ -19,29 +19,31 @@ app.get("/", (req, res) => {
 
 app.get("/nativeBalance", async (req, res) => {
   try {
+    const { address } = req.query
+
     const ethResponse = await Moralis.EvmApi.balance.getNativeBalance({
       chain: EvmChain.ETHEREUM,
-      address: "0x2fEb1512183545f48f6b9C5b4EbfCaF49CfCa6F3",
+      // address: "0x2fEb1512183545f48f6b9C5b4EbfCaF49CfCa6F3",
+      address: address,
     });
 
     const maticResponse = await Moralis.EvmApi.balance.getNativeBalance({
       chain: EvmChain.POLYGON,
-      address: "0x2fEb1512183545f48f6b9C5b4EbfCaF49CfCa6F3",
+      // address: "0x2fEb1512183545f48f6b9C5b4EbfCaF49CfCa6F3",
+      address: address,
     });
 
     const ethPrice = await Moralis.EvmApi.token.getTokenPrice({
       chain: EvmChain.ETHEREUM,
       exchange: "uniswap-v2",
-      address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", // WETH contract address
     });
 
     const maticPrice = await Moralis.EvmApi.token.getTokenPrice({
       chain: EvmChain.POLYGON,
       exchange: "quickswap",
-      address: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+      address: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270", // Matic contract address
     });
-
-
 
     const userBalance = ethResponse.result;
     userBalance.ethBalance = (Number(ethResponse.result.balance) / 10 ** 18).toFixed(4)
