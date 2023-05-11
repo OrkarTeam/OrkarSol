@@ -21,9 +21,11 @@ export const Button = ({ backgroundColor, className, children, ...restProps }) =
 
 export default function Home() {
   return (
-    <div className="mt-[80px]">
-      <Hero />
-      <TrendingCollections />
+    <div className="mt-[80px] flex justify-center">
+      <div>
+        <Hero />
+        <TrendingCollections />
+      </div>
     </div>
   );
 }
